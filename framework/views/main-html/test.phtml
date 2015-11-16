@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap test</title>
+
+    <!-- jQuery is REQUIRED -->
+    <script src="<?=$this->dependencyPaths["jQuery"]?>"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="<?=$this->dependencyPaths["bootstrapCss"]?>">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="<?=$this->dependencyPaths["bootstrapOptionalThemeCss"]?>">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="<?=$this->dependencyPaths["bootstrapJavascript"]?>"></script>
+
+</head>
+<body>
+
+    <div id="btn-group-test" class="btn-group">
+        <? foreach ($this->reqPathParamArray as $pathParam) { ?>
+        <button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-remove"></span> <?=$pathParam?>
+        </button>
+        <? } ?>
+    </div>
+
+</body>
+</html>
