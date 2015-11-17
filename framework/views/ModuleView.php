@@ -19,10 +19,10 @@ abstract class ModuleView
 
     function initDependencyPaths() {
         $this->dependencyPaths = array(
-            "jQuery" => "bower_components/jquery/dist/jquery.min.js",
-            "bootstrapCss" => "bower_components/bootstrap/dist/css/bootstrap.min.css",
-            "bootstrapOptionalThemeCss" => "bower_components/bootstrap/dist/css/bootstrap-theme.min.css",
-            "bootstrapJavascript" => "bower_components/bootstrap/dist/js/bootstrap.min.js"
+            "jQuery" => "/bower_components/jquery/dist/jquery.min.js",
+            "bootstrapCss" => "/bower_components/bootstrap/dist/css/bootstrap.min.css",
+            "bootstrapOptionalThemeCss" => "/bower_components/bootstrap/dist/css/bootstrap-theme.min.css",
+            "bootstrapJavascript" => "/bower_components/bootstrap/dist/js/bootstrap.min.js"
         );
     }
 
