@@ -12,17 +12,27 @@ abstract class ModuleView
     // variables through the ModelView class that "include"s it
     protected $mainHtmlFile;
 
-    function __construct(&$model) {
-        $this->initDependencyPaths();
+    function __construct(&$model, $useLocalDependencyPaths=false) {
+        $this->initDependencyPaths($useLocalDependencyPaths);
         $this->extractInfoFromModel($model);
     }
 
-    function initDependencyPaths() {
+    /** @param bool $useLocalDependencyPaths */
+    function initDependencyPaths($useLocalDependencyPaths) {
+
         $this->dependencyPaths = array(
-            "jQuery" => "/bower_components/jquery/dist/jquery.min.js",
-            "bootstrapCss" => "/bower_components/bootstrap/dist/css/bootstrap.min.css",
-            "bootstrapOptionalThemeCss" => "/bower_components/bootstrap/dist/css/bootstrap-theme.min.css",
-            "bootstrapJavascript" => "/bower_components/bootstrap/dist/js/bootstrap.min.js"
+            "jQuery" => $useLocalDependencyPaths?
+                "/bower_components/jquery/dist/jquery.min.js" :
+                "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js",
+            "bootstrapCss" => $useLocalDependencyPaths?
+                "/bower_components/bootstrap/dist/css/bootstrap.min.css" :
+                "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
+            "bootstrapOptionalThemeCss" => $useLocalDependencyPaths?
+                "/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" :
+                "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css",
+            "bootstrapJavascript" => $useLocalDependencyPaths?
+                "/bower_components/bootstrap/dist/js/bootstrap.min.js" :
+                "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
         );
     }
 
