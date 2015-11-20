@@ -14,13 +14,15 @@ use framework\components\CleanRequestUrlParser;
 require_once("components/CleanRequestUrlParser.php");
 use framework\controllers\TestController;
 require_once("controllers/TestController.php");
+use framework\controllers\PostController;
+require_once("controllers/PostController.php");
 
 
 // figure out what module to run here:
 $moduleToRun = CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl()[0];
 if (strtolower($moduleToRun)==='post') {
-//    $postController = new PostController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
-//    $postController->run();
+    $postController = new PostController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
+    $postController->run();
 } else {
     $explodedPathToModule = array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 4);
     $testController = new TestController($explodedPathToModule);
