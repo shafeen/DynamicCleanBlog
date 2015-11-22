@@ -32,7 +32,9 @@ abstract class ModuleView
                 "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css",
             "bootstrapJavascript" => $useLocalDependencyPaths?
                 "/bower_components/bootstrap/dist/js/bootstrap.min.js" :
-                "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+                "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js",
+            "cleanblogCss" => "/dependencies/clean-blog.min.css",
+            "cleanblogJavascript" => "/dependencies/clean-blog.min.js"
         );
     }
 
