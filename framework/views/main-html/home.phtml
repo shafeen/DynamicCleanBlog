@@ -131,8 +131,17 @@
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
-                    <li class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span> Newer Posts</a></li>
-                    <li class="next"><a href="#">Older Posts <span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    <!-- prev page available if on any page other than page 1 -->
+                    <? if ($this->pageNum > 1) { ?>
+                    <li class="previous">
+                        <a href="<?="/home/page/".($this->pageNum-1)?>"><span class="glyphicon glyphicon-chevron-left"></span> Newer Posts</a>
+                    </li>
+                    <? } ?>
+                    <? if ($this->pageNum < $this->maxPageNum) { ?>
+                    <li class="next">
+                        <a href="<?="/home/page/".($this->pageNum+1)?>">Older Posts <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </li>
+                    <? } ?>
                 </ul>
             </div>
         </div>
