@@ -43,7 +43,7 @@ class HomeModel
     private function initDefaults() {
         // TODO: use reasonable defaults later, test values below
         $this->pageNum = 1;
-        $this->totalPosts = 10;
+        $this->totalPosts = 16;
         $this->maxPageNum = ceil($this->totalPosts/self::postsPerPage);
         $this->curPagePostIds = array();
     }
