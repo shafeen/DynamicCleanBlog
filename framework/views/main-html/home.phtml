@@ -84,7 +84,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-preview">
+                <div id="postPreview1" class="post-preview">
                     <a href="/post">
                         <h2 class="post-title">
                             Man must explore, and this is exploration at its greatest
@@ -134,12 +134,12 @@
                     <!-- prev page available if on any page other than page 1 -->
                     <? if ($this->pageNum > 1) { ?>
                     <li class="previous">
-                        <a href="<?="/home/page/".($this->pageNum-1)?>"><span class="glyphicon glyphicon-chevron-left"></span> Newer Posts</a>
+                        <a href="<?="/home/page/".($this->pageNum-1)."#postPreview1"?>"><span class="glyphicon glyphicon-chevron-left"></span> Newer Posts</a>
                     </li>
                     <? } ?>
                     <? if ($this->pageNum < $this->maxPageNum) { ?>
                     <li class="next">
-                        <a href="<?="/home/page/".($this->pageNum+1)?>">Older Posts <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <a href="<?="/home/page/".($this->pageNum+1)."#postPreview1"?>">Older Posts <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </li>
                     <? } ?>
                 </ul>
