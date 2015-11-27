@@ -25,17 +25,17 @@ require_once("controllers/ContactController.php");
 
 
 // figure out what module to run here:
-$moduleToRun = CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl()[0];
-if (strtolower($moduleToRun)==='post') {
+$moduleToRun = strtolower(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl()[0]);
+if ($moduleToRun==='post') {
     $postController = new PostController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
     $postController->run();
-} else if (empty($moduleToRun) || strtolower($moduleToRun)==='home') {
+} else if (empty($moduleToRun) || $moduleToRun==='home') {
     $homeController = new HomeController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
     $homeController->run();
-} else if (strtolower($moduleToRun)==='about') {
+} else if ($moduleToRun==='about') {
     $aboutController = new AboutController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
     $aboutController->run();
-} else if (strtolower($moduleToRun)==='contact') {
+} else if ($moduleToRun==='contact') {
     $contactController = new ContactController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
     $contactController->run();
 } else {
