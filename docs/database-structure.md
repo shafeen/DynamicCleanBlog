@@ -1,18 +1,18 @@
 Main Database Table Structures
 ==============================
 
-posts
+posts [x]
 -----
 - id
 - title 
 - subtitle
 - clean_url_title
-- body_id (foreign key)
+- post_body_id (foreign key)
 - created 
 - modified
 - author
 
-post_body
+post_body [x]
 ---------
 - id
 - body_text
@@ -24,17 +24,17 @@ images
 - name 
 - location (hard drive location)
 
-tags
+tags [x]
 ----
 - id 
 - tagname
 
-tagged_posts
+tagged_posts [x]
 ------------
 - post_id (foreign_key)
 - tag_id (foreign key)
 
-authors
+authors [x]
 -------
 - id
 - name
