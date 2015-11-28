@@ -1,8 +1,8 @@
 <?php
 
 $DB_INFO = array(
-    "username" => "root",
-    "password" => "password",
+    "username" => "shafeen",
+    "password" => "admin78",
     "main_db_name" => "codingitreal",
     "db_addr" => "localhost"
 );

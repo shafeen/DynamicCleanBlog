@@ -17,6 +17,7 @@ class PostController extends ModuleController
         // TODO: complete this function
         // TODO: move database access to a separate component
         /** @var array $DB_INFO */
+        // NOTE: use php5-mysqlnd
         $dbConn = mysqli_connect(
             $DB_INFO["db_addr"],
             $DB_INFO["username"],
