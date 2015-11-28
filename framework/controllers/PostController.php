@@ -14,10 +14,10 @@ class PostController extends ModuleController
     private function getPostFromDb($date, $cleanUrlTitle) {
         // TODO: complete this function
         // TODO: move database access to a separate component
-        /** @var array $DB_INFO */
         // NOTE: use php5-mysqlnd
+        /** @var array $DB_INFO */
+        global $DB_INFO;
         $dbConn = mysqli_connect(
-            global $DB_INFO;
             $DB_INFO["db_addr"],
             $DB_INFO["username"],
             $DB_INFO["password"],
