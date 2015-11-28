@@ -17,6 +17,7 @@ class PostController extends ModuleController
         /** @var array $DB_INFO */
         // NOTE: use php5-mysqlnd
         $dbConn = mysqli_connect(
+            global $DB_INFO;
             $DB_INFO["db_addr"],
             $DB_INFO["username"],
             $DB_INFO["password"],
