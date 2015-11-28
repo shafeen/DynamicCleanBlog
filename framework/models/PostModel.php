@@ -2,6 +2,8 @@
 
 namespace framework\models;
 
+use framework\components\CleanRequestUrlParser;
+
 class PostModel
 {
     private $title;
@@ -42,12 +44,16 @@ class PostModel
     }
 
     function __construct($title, $subtitle, $author_name, $created, $body_text) {
-//        $this->populateWithTestData();
-        $this->title = $title;
-        $this->subtitle = $subtitle;
-        $this->author = $author_name;
-        $this->date = $created;
-        $this->postBody = $body_text;
+        // detect if we need to populate with test data
+        if (empty(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl()[1])) {
+            $this->populateWithTestData();
+        } else {
+            $this->title = $title;
+            $this->subtitle = $subtitle;
+            $this->author = $author_name;
+            $this->date = $created;
+            $this->postBody = $body_text;
+        }
     }
 
     private function populateWithTestData() {
