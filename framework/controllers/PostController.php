@@ -2,8 +2,6 @@
 
 namespace framework\controllers;
 
-require_once("config/config.php");
-
 use framework\controllers\ModuleController;
 use framework\views\PostView;
 use framework\models\PostModel;
