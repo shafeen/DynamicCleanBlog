@@ -12,7 +12,8 @@ class PostView extends ModuleView
         $this->title = $model->getTitle();
         $this->subtitle = $model->getSubtitle();
         $this->author = $model->getAuthor();
-        $this->date = $model->getDate();
+        // convert date to a human readable format
+        $this->date = date("F jS, Y",strtotime($model->getDate()));
         $this->postBody = $model->getPostBody();
     }
 }
