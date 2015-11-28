@@ -1,5 +1,6 @@
 <?php
 
+require_once("config/config.php");
 
 /*
  * This is the main application FrontController
