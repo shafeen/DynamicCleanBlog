@@ -1,7 +1,9 @@
 <?php
 
-$DB_CREDENTIALS = array(
+$DB_INFO = array(
     "username" => "root",
-    "password" => "password"
+    "password" => "password",
+    "main_db_name" => "codingitreal",
+    "db_addr" => "localhost"
 );
 

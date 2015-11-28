@@ -41,8 +41,13 @@ class PostModel
         return $this->postTags;
     }
 
-    function __construct() {
-        $this->populateWithTestData();
+    function __construct($title, $subtitle, $author_name, $created, $body_text) {
+//        $this->populateWithTestData();
+        $this->title = $title;
+        $this->subtitle = $subtitle;
+        $this->author = $author_name;
+        $this->date = $created;
+        $this->postBody = $body_text;
     }
 
     private function populateWithTestData() {
