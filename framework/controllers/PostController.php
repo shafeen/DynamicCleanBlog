@@ -2,6 +2,7 @@
 
 namespace framework\controllers;
 
+use framework\components\CleanRequestUrlParser;
 use framework\controllers\ModuleController;
 use framework\views\PostView;
 use framework\models\PostModel;
@@ -38,6 +39,22 @@ class PostController extends ModuleController
         $result = $dbConn->query($sql);
         $postObj = $result->fetch_object();
         return $postObj;
+    }
+
+    /** Date and Title will be parsed assuming the
+     *  Request Url is in the format /path/to/module/<date_str>/<title_str>
+     *  For Example: /post/1989-05-24/this-is-a-post-title
+     *
+     *  @param int $offset */
+    protected function parseRequestVars($offset) {
+        $explodedCleanRequestUrl = CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl();
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            $_GET['date'] = $explodedCleanRequestUrl[$offset+0];
+            $_GET['title'] = $explodedCleanRequestUrl[$offset+1];
+        } else { // assume it is a "POST"
+            $_POST['date'] = $explodedCleanRequestUrl[$offset+0];
+            $_POST['title'] = $explodedCleanRequestUrl[$offset+1];
+        }
     }
 
     function run() {
