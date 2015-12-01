@@ -25,27 +25,24 @@ use framework\controllers\ContactController;
 require_once("controllers/ContactController.php");
 
 
-// figure out what module to run here:
+// figure out what module to run:
 $moduleToRun = 'home';
 if (count(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl())) {
     $moduleToRun = strtolower(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl()[0]);
 }
 
+// run the module's controller
+$moduleController = null;
 if ($moduleToRun==='post') {
-    $postController = new PostController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
-    $postController->run();
+    $moduleController = new PostController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
 } else if (empty($moduleToRun) || $moduleToRun==='home') {
-    $homeController = new HomeController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
-    $homeController->run();
+    $moduleController = new HomeController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
 } else if ($moduleToRun==='about') {
-    $aboutController = new AboutController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
-    $aboutController->run();
+    $moduleController = new AboutController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
 } else if ($moduleToRun==='contact') {
-    $contactController = new ContactController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
-    $contactController->run();
-} else {
+    $moduleController = new ContactController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
+} else { // this is a test module
     $explodedPathToModule = array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 4);
-    $testController = new TestController($explodedPathToModule);
-    $testController->run();
+    $moduleController = new TestController($explodedPathToModule);
 }
-
+$moduleController->run();
