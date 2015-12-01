@@ -26,7 +26,11 @@ require_once("controllers/ContactController.php");
 
 
 // figure out what module to run here:
-$moduleToRun = strtolower(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl()[0]);
+$moduleToRun = 'home';
+if (count(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl())) {
+    $moduleToRun = strtolower(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl()[0]);
+}
+
 if ($moduleToRun==='post') {
     $postController = new PostController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
     $postController->run();
