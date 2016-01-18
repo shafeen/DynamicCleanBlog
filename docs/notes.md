@@ -16,3 +16,11 @@ The urls should look something like:
 3. List all posts (summaries) that have the specified tags.
    Paginate at 5 posts per page.
 4. [OPTIONAL] Create a tag label to display post tags in the "HOME" and "TAGGED" modules.
+
+
+**How to handle DB Changes**
+
+1. Use a simple naming scheme when making db_changes.
+   For example: if you are making a change on 5th May 2016,
+   place all your sql in a .sql file and name that file
+   05-05-2016.sql and place that file under "framework/config/db_changes/"
