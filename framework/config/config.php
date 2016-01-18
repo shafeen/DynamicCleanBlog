@@ -7,3 +7,8 @@ $DB_INFO = array(
     "db_addr" => "localhost"
 );
 
+$SOCIAL_ACCOUNTS = array(
+    "twitter"  => null,
+    "facebook" => null,
+    "github"   => null
+);
