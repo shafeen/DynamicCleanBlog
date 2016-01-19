@@ -8,7 +8,7 @@ $DB_INFO = array(
 );
 
 $SOCIAL_ACCOUNTS = array(
-    "twitter"  => null,
-    "facebook" => null,
-    "github"   => null
+    "twitter"  => "#",
+    "facebook" => "#",
+    "github"   => "http://github.com/shafeen/DynamicCleanBlog"
 );
