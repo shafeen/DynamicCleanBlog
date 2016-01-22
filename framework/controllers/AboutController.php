@@ -12,6 +12,7 @@ require_once("views/AboutView.php");
 class AboutController extends ModuleController
 {
     function run() {
+        // The About module view page does not have need to be dynamic.
         $this->moduleModel = null;
         $this->moduleView = new AboutView($this->moduleModel);
         $this->moduleView->setMainHtmlFile("about.phtml");
