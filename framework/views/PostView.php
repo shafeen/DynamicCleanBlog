@@ -7,6 +7,10 @@ require_once("models/PostModel.php");
 
 class PostView extends ModuleView
 {
+    protected function initStaticInfo() {
+        // no static info to initialize
+    }
+
     /** @param PostModel $model */
     protected function extractInfoFromModel(&$model) {
         $this->title = $model->getTitle();

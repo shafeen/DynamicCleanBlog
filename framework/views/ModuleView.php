@@ -14,6 +14,7 @@ abstract class ModuleView
 
     function __construct(&$model, $useLocalDependencyPaths=false) {
         $this->initDependencyPaths($useLocalDependencyPaths);
+        $this->initStaticInfo();
         $this->extractInfoFromModel($model);
     }
 
@@ -42,6 +43,8 @@ abstract class ModuleView
     function setMainHtmlFile($filename) {
         $this->mainHtmlFile = $filename;
     }
+
+    abstract protected function initStaticInfo();
 
     abstract protected function extractInfoFromModel(&$model);
 
