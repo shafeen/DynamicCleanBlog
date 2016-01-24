@@ -29,6 +29,14 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- jQuery -->
+    <script defer src="<?=$this->dependencyPaths["jQuery"]?>"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script defer src="<?=$this->dependencyPaths["bootstrapJavascript"]?>"></script>
+
+    <!-- Clean Blog Theme JavaScript -->
+    <script defer src="<?=$this->dependencyPaths["cleanblogJavascript"]?>"></script>
 </head>
 
 <body>
@@ -65,15 +73,6 @@
 
     <!-- Footer -->
     <? include("views/partial-html/_footer.phtml"); ?>
-
-    <!-- jQuery -->
-    <script src="<?=$this->dependencyPaths["jQuery"]?>"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="<?=$this->dependencyPaths["bootstrapJavascript"]?>"></script>
-
-    <!-- Clean Blog Theme JavaScript -->
-    <script src="<?=$this->dependencyPaths["cleanblogJavascript"]?>"></script>
 
 </body>
 
