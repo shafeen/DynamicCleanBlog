@@ -4,9 +4,11 @@ namespace framework\controllers;
 
 use framework\components\CleanRequestUrlParser;
 use framework\controllers\ModuleController;
+use framework\views\NotFoundView;
 use framework\views\PostView;
 use framework\models\PostModel;
 require_once("controllers/ModuleController.php");
+require_once("views/NotFoundView.php");
 require_once("views/PostView.php");
 require_once("models/PostModel.php");
 
@@ -66,19 +68,20 @@ class PostController extends ModuleController
         $postObj = $this->getPostFromDb($postDate, $postCleanUrlTitle);
 
         if (empty($postObj)) { // perform a cheap exit for incorrect urls
-            ob_clean();
-            echo "Page ".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']." Not Found";
-            exit();
+            $this->moduleModel = null;
+            $this->moduleView = new NotFoundView($this->moduleModel);
+            $this->moduleView->setMainHtmlFile("pagenotfound.phtml");
+            // echo "Page ".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']." Not Found";
+        } else {
+            $this->moduleModel = new PostModel(
+                $postObj->title,
+                $postObj->subtitle,
+                $postObj->author_name,
+                $postObj->created,
+                $postObj->body_text);
+            $this->moduleView = new PostView($this->moduleModel);
+            $this->moduleView->setMainHtmlFile("post.phtml");
         }
-
-        $this->moduleModel = new PostModel(
-            $postObj->title,
-            $postObj->subtitle,
-            $postObj->author_name,
-            $postObj->created,
-            $postObj->body_text);
-        $this->moduleView = new PostView($this->moduleModel);
-        $this->moduleView->setMainHtmlFile("post.phtml");
         $this->moduleView->displayContent();
     }
 

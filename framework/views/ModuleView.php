@@ -48,8 +48,11 @@ abstract class ModuleView
 
     abstract protected function extractInfoFromModel(&$model);
 
+    /** this function should be the last thing called in the program,
+     *  the "exit()" will prevent any code from running after the call */
     function displayContent() {
         include("views/main-html/".$this->mainHtmlFile);
+        exit();
     }
 
 }

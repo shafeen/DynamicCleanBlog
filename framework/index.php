@@ -13,6 +13,8 @@ require_once("config/config.php");
 
 use framework\components\CleanRequestUrlParser;
 require_once("components/CleanRequestUrlParser.php");
+use framework\controllers\NotFoundController;
+require_once("controllers/NotFoundController.php");
 use framework\controllers\TestController;
 require_once("controllers/TestController.php");
 use framework\controllers\PostController;
@@ -41,8 +43,7 @@ if ($moduleToRun==='post') {
     $moduleController = new AboutController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
 } else if ($moduleToRun==='contact') {
     $moduleController = new ContactController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
-} else { // this is a test module
-    $explodedPathToModule = array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 4);
-    $moduleController = new TestController($explodedPathToModule);
+} else {
+    $moduleController = new NotFoundController(array_slice(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl(), 0, 1));
 }
 $moduleController->run();

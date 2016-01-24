@@ -29,8 +29,15 @@ overwritten to send to a different controller or we have to make
 sure that the "main/contact_me.php" is available to handle the form.
 
 
-DONE:
------
+
+
+
+DONE (reverse chrono order):
+----------------------------
+
+Page Not Found module
+----------------------
+Have a page/module to go to for erroneous urls or module addresses.
 
 About Module
 -------------
