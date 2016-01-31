@@ -6,9 +6,8 @@ use framework\controllers\ModuleController;
 use framework\models\TaggedModel;
 //use framework\views\TaggedView;
 require_once("controllers/ModuleController.php");
-require_once("views/TaggedModel.php");
+require_once("models/TaggedModel.php");
 //require_once("views/TaggedView.php");
-//require_once("models/AboutModel.php");
 
 class TaggedController extends ModuleController
 {
