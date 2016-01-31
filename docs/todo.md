@@ -1,5 +1,5 @@
 TODO:
------
+=====
 
 Tagged (Posts) Module
 ---------------------
@@ -33,7 +33,7 @@ sure that the "main/contact_me.php" is available to handle the form.
 
 
 DONE (reverse chrono order):
-----------------------------
+============================
 
 Page Not Found module
 ----------------------
