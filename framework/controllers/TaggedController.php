@@ -11,6 +11,8 @@ require_once("models/TaggedModel.php");
 
 class TaggedController extends ModuleController
 {
+    const TAG_DELIMITER = "--";
+
     // TODO: move database access to a separate component
     private function getTaggedPostsFromDb($tagname) {
         if (empty($tagname)) {
@@ -24,7 +26,7 @@ class TaggedController extends ModuleController
             $DB_INFO["password"],
             $DB_INFO["main_db_name"]);
 
-        // clean the tagname -> todo: use parameterized query$
+        // clean the tagname -> todo: use parameterized queries
         $tagname = $dbConn->real_escape_string($tagname);
         $sql = "SELECT
                   posts.id as post_id,
@@ -35,18 +37,24 @@ class TaggedController extends ModuleController
                   JOIN tags ON tagged_posts.tag_id = tags.id
                 WHERE tagname='$tagname'";
         $result = $dbConn->query($sql);
-        $taggedPostObjs = $result->fetch_all(); // TODO: debug this
+        $taggedPostObjs = array(); // TODO: debug this
+        while ($taggedPostObj = $result->fetch_object()) {
+            $taggedPostObjs []= $taggedPostObj;
+        }
         return $taggedPostObjs;
     }
 
-    /** @return TaggedModel*/
-    function initTaggedModel() {
-        // TODO: initialize the tagged model here
+    /** @return TaggedModel */
+    function getInitializedTaggedModel() {
+        $unparsedTags = isset($_GET["tags"])? $_GET["tags"] : "";
+        $tags = explode(self::TAG_DELIMITER, $unparsedTags);
+        $pageNum = (isset($_GET["page"]) && (int)$_GET["page"])? (int)$_GET["page"] : 1;
+        $apiEndpoint = isset($_GET["apiendpoint"])? $_GET["apiendpoint"] : "n";
+        return new TaggedModel($tags, $pageNum, $apiEndpoint);
     }
 
     function run() {
-        // The About module view page does not have need to be dynamic.
-        $this->moduleModel = null; // TODO: call to initModel here
+        $this->moduleModel = $this->getInitializedTaggedModel(); // TODO: verify
 //        $this->moduleView = new TaggedView($this->moduleModel); // TODO: create view
 //        $this->moduleView->setMainHtmlFile("tagged.phtml"); // TODO: create main-html (for non rest api page)
 //        $this->moduleView->displayContent();
