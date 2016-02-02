@@ -58,6 +58,11 @@ class TaggedController extends ModuleController
 //        $this->moduleView = new TaggedView($this->moduleModel); // TODO: create view
 //        $this->moduleView->setMainHtmlFile("tagged.phtml"); // TODO: create main-html (for non rest api page)
 //        $this->moduleView->displayContent();
+        // TODO: this is just a test -> should work for more than one tagname
+        if ($this->moduleModel->isApiEndpoint()) {
+            header('Content-Type: application/json');
+            echo json_encode($this->getTaggedPostsFromDb($this->moduleModel->getTags()[0]));
+        }
     }
 
 
