@@ -29,6 +29,10 @@ class PostController extends ModuleController
             $DB_INFO["password"],
             $DB_INFO["main_db_name"]);
 
+        // clean the $date and $cleanUrlTitle
+        $date = $dbConn->real_escape_string($date);
+        $cleanUrlTitle = $dbConn->real_escape_string($cleanUrlTitle);
+
         $sql = "SELECT
               posts.id AS post_id,
               authors.name as author_name,
