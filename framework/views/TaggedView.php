@@ -6,6 +6,13 @@ use framework\models\TaggedModel;
 
 class TaggedView extends ModuleView
 {
+    /** @var array */
+    protected $tags;
+    /** @var int */
+    protected $pageNum;
+    /** @var array */
+    protected $taggedPostObjs;
+
     protected function initStaticInfo() {
         // no static data
     }
@@ -16,7 +23,6 @@ class TaggedView extends ModuleView
         $this->tags = $model->getTags();
         $this->pageNum = $model->getPageNum();
         $this->taggedPostObjs = $model->getTaggedPostObjs();
-        // TODO: the model
     }
 
 }

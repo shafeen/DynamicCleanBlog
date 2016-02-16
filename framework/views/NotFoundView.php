@@ -7,6 +7,9 @@ require_once("views/ModuleView.php");
 
 class NotFoundView extends ModuleView
 {
+    /** @var array */
+    protected $headerInfo;
+
     protected function initStaticInfo() {
         $this->headerInfo = array(
             "mainHeading" => "Page Not Found",
