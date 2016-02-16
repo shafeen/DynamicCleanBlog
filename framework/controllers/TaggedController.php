@@ -4,10 +4,10 @@ namespace framework\controllers;
 
 use framework\controllers\ModuleController;
 use framework\models\TaggedModel;
-//use framework\views\TaggedView;
+use framework\views\TaggedView;
 require_once("controllers/ModuleController.php");
 require_once("models/TaggedModel.php");
-//require_once("views/TaggedView.php");
+require_once("views/TaggedView.php");
 
 class TaggedController extends ModuleController
 {
@@ -37,7 +37,7 @@ class TaggedController extends ModuleController
                   JOIN tags ON tagged_posts.tag_id = tags.id
                 WHERE tagname='$tagname'";
         $result = $dbConn->query($sql);
-        $taggedPostObjs = array(); // TODO: debug this
+        $taggedPostObjs = []; // TODO: debug this
         while ($taggedPostObj = $result->fetch_object()) {
             $taggedPostObjs []= $taggedPostObj;
         }
@@ -53,15 +53,27 @@ class TaggedController extends ModuleController
         return new TaggedModel($tags, $pageNum, $apiEndpoint);
     }
 
+    /** Request URL will be assumed to be in the following format below:
+     *  /tagged/tags/<tag1>--<tag2>--<tag3>/page/<pagenum>
+     *
+     *  For Example:
+     *  /tagged/tags/redis--java/page/1 */
     function run() {
         $this->moduleModel = $this->getInitializedTaggedModel(); // TODO: verify
-//        $this->moduleView = new TaggedView($this->moduleModel); // TODO: create view
-//        $this->moduleView->setMainHtmlFile("tagged.phtml"); // TODO: create main-html (for non rest api page)
-//        $this->moduleView->displayContent();
-        // TODO: this is just a test -> should work for more than one tagname
+        $this->moduleView = new TaggedView($this->moduleModel); // TODO: complete view class
+
         if ($this->moduleModel->isApiEndpoint()) {
             header('Content-Type: application/json');
-            echo json_encode($this->getTaggedPostsFromDb($this->moduleModel->getTags()[0]));
+
+            $tags = $this->moduleModel->getTags();
+            $taggedPostObjsForTag = [];
+            foreach ($tags as $tag) {
+                $taggedPostObjsForTag = array_merge($taggedPostObjsForTag, $this->getTaggedPostsFromDb($tag));
+            }
+            echo json_encode($taggedPostObjsForTag);
+        } else {
+            $this->moduleView->setMainHtmlFile("tagged.phtml");
+            $this->moduleView->displayContent();
         }
     }
 
