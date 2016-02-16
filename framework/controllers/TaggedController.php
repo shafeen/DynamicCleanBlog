@@ -13,6 +13,14 @@ class TaggedController extends ModuleController
 {
     const TAG_DELIMITER = "--";
 
+    private function getTaggedPostsFromDbForTags($tagArray) {
+        $taggedPostObjsForTag = [];
+        foreach ($tagArray as $tag) {
+            $taggedPostObjsForTag = array_merge($taggedPostObjsForTag, $this->getTaggedPostsFromDb($tag));
+        }
+        return $taggedPostObjsForTag;
+    }
+
     // TODO: move database access to a separate component
     private function getTaggedPostsFromDb($tagname) {
         if (empty($tagname)) {
@@ -64,13 +72,7 @@ class TaggedController extends ModuleController
 
         if ($this->moduleModel->isApiEndpoint()) {
             header('Content-Type: application/json');
-
-            $tags = $this->moduleModel->getTags();
-            $taggedPostObjsForTag = [];
-            foreach ($tags as $tag) {
-                $taggedPostObjsForTag = array_merge($taggedPostObjsForTag, $this->getTaggedPostsFromDb($tag));
-            }
-            echo json_encode($taggedPostObjsForTag);
+            echo json_encode($this->getTaggedPostsFromDbForTags($this->moduleModel->getTags()));
         } else {
             $this->moduleView->setMainHtmlFile("tagged.phtml");
             $this->moduleView->displayContent();
