@@ -13,6 +13,10 @@ class TaggedView extends ModuleView
     /** @param TaggedModel $model */
     protected function extractInfoFromModel(&$model) {
         // TODO: Implement extractInfoFromModel() method.
+        $this->tags = $model->getTags();
+        $this->pageNum = $model->getPageNum();
+        $this->taggedPostObjs = $model->getTaggedPostObjs();
+        // TODO: the model
     }
 
 }

@@ -18,6 +18,7 @@ class TaggedController extends ModuleController
         foreach ($tagArray as $tag) {
             $taggedPostObjsForTag = array_merge($taggedPostObjsForTag, $this->getTaggedPostsFromDb($tag));
         }
+        // TODO: ensure posts with multiple tags aren't double counted
         return $taggedPostObjsForTag;
     }
 
@@ -58,7 +59,8 @@ class TaggedController extends ModuleController
         $tags = explode(self::TAG_DELIMITER, $unparsedTags);
         $pageNum = (isset($_GET["page"]) && (int)$_GET["page"])? (int)$_GET["page"] : 1;
         $apiEndpoint = isset($_GET["apiendpoint"])? $_GET["apiendpoint"] : "n";
-        return new TaggedModel($tags, $pageNum, $apiEndpoint);
+        $taggedPostObjs = $this->getTaggedPostsFromDbForTags($tags);
+        return new TaggedModel($tags, $pageNum, $apiEndpoint, $taggedPostObjs);
     }
 
     /** Request URL will be assumed to be in the following format below:
@@ -72,7 +74,7 @@ class TaggedController extends ModuleController
 
         if ($this->moduleModel->isApiEndpoint()) {
             header('Content-Type: application/json');
-            echo json_encode($this->getTaggedPostsFromDbForTags($this->moduleModel->getTags()));
+            echo json_encode($this->moduleModel->getTaggedPostObjs());
         } else {
             $this->moduleView->setMainHtmlFile("tagged.phtml");
             $this->moduleView->displayContent();
