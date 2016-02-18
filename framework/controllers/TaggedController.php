@@ -41,7 +41,11 @@ class TaggedController extends ModuleController
                   posts.id as post_id,
                   posts.created,
                   posts.title as post_title,
+                  posts.subtitle as post_subtitle,
+                  posts.clean_url_title,
+                  authors.name as author_name,
                   tags.tagname FROM posts
+                  JOIN authors ON posts.author_id = authors.id
                   JOIN tagged_posts ON posts.id = tagged_posts.post_id
                   JOIN tags ON tagged_posts.tag_id = tags.id
                 WHERE tagname='$tagname'";
@@ -69,8 +73,10 @@ class TaggedController extends ModuleController
      *  For Example:
      *  /tagged/tags/redis--java/page/1 */
     function run() {
-        $this->moduleModel = $this->getInitializedTaggedModel(); // TODO: verify
-        $this->moduleView = new TaggedView($this->moduleModel); // TODO: complete view class
+        $this->moduleModel = $this->getInitializedTaggedModel();
+
+        // TODO: the tagged posts need to have pagination implemented (doesn't work now)
+        $this->moduleView = new TaggedView($this->moduleModel);
 
         if ($this->moduleModel->isApiEndpoint()) {
             header('Content-Type: application/json');

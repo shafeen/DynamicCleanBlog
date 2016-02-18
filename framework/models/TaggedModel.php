@@ -4,6 +4,8 @@ namespace framework\models;
 
 class TaggedModel
 {
+    const taggedPostsPerPage = 10;
+
     private $tags;
     private $pageNum;
     private $apiEndpoint;
@@ -17,6 +19,11 @@ class TaggedModel
     /** @return int */
     public function getPageNum() {
         return $this->pageNum;
+    }
+
+    /** @return int */
+    public function getMaxPageNum() {
+        return ceil(count($this->taggedPostObjs) / self::taggedPostsPerPage);
     }
 
     /** @return boolean */
