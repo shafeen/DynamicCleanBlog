@@ -37,7 +37,12 @@
                                 <?=$taggedPostObj->post_subtitle?>
                             </h3>
                         </a>
-                        <p class="post-meta">Posted by <a href="#"><?=$taggedPostObj->author_name?></a> on <?=date("F jS, Y",strtotime($taggedPostObj->created))?></p>
+                        <p class="post-meta">Posted by <a href="#"><?=$taggedPostObj->author_name?></a> on <?=date("F jS, Y",strtotime($taggedPostObj->created))?>
+                            &nbsp &nbsp &nbsp
+                            <? foreach ($taggedPostObj->tagname as $tagname) { ?>
+                                <b>[<?=$tagname?>]</b>
+                            <? } ?>
+                        </p>
                     </div>
                     <hr/>
                 <? } ?>
