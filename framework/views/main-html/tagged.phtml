@@ -27,17 +27,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <? for($i = 0, $len = count($this->taggedPostObjs); $i < $len; $i++) { ?>
-                    <div <?=$i==0?'id="postPreview1"':''?> class="post-preview">
-                        <a href="/post/<?=$this->taggedPostObjs[$i]->created?>/<?=$this->taggedPostObjs[$i]->clean_url_title?>">
+                <? foreach($this->taggedPostObjs as $taggedPostObj) { ?>
+                    <div class="post-preview">
+                        <a href="/post/<?=$taggedPostObj->created?>/<?=$taggedPostObj->clean_url_title?>">
                             <h2 class="post-title">
-                                <?=$this->taggedPostObjs[$i]->post_title?>
+                                <?=$taggedPostObj->post_title?>
                             </h2>
                             <h3 class="post-subtitle">
-                                <?=$this->taggedPostObjs[$i]->post_subtitle?>
+                                <?=$taggedPostObj->post_subtitle?>
                             </h3>
                         </a>
-                        <p class="post-meta">Posted by <a href="#"><?=$this->taggedPostObjs[$i]->author_name?></a> on <?=date("F jS, Y",strtotime($this->taggedPostObjs[$i]->created))?></p>
+                        <p class="post-meta">Posted by <a href="#"><?=$taggedPostObj->author_name?></a> on <?=date("F jS, Y",strtotime($taggedPostObj->created))?></p>
                     </div>
                     <hr/>
                 <? } ?>

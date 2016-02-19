@@ -14,17 +14,14 @@ class TaggedController extends ModuleController
     const TAG_DELIMITER = "--";
 
     private function getTaggedPostsFromDbForTags($tagArray) {
-        $taggedPostObjsForTag = [];
-        foreach ($tagArray as $tag) {
-            $taggedPostObjsForTag = array_merge($taggedPostObjsForTag, $this->getTaggedPostsFromDb($tag));
-        }
-        // TODO: ensure posts with multiple tags aren't double counted
-        return $taggedPostObjsForTag;
+        return $this->getTaggedPostsFromDb($tagArray);
     }
 
     // TODO: move database access to a separate component
-    private function getTaggedPostsFromDb($tagname) {
-        if (empty($tagname)) {
+    /** @param array $tagnameArray
+     *  @return array */
+    private function getTaggedPostsFromDb($tagnameArray) {
+        if (empty($tagnameArray)) {
             return null;
         }
 
@@ -35,8 +32,13 @@ class TaggedController extends ModuleController
             $DB_INFO["password"],
             $DB_INFO["main_db_name"]);
 
-        // clean the tagname -> todo: use parameterized queries
-        $tagname = $dbConn->real_escape_string($tagname);
+        // todo: use parameterized queries
+        $tagnameWhereStr = '';
+        foreach ($tagnameArray as $tagname) {
+            $tagnameWhereStr .= ($tagnameWhereStr=='')? '': ' OR ';
+            $tagnameWhereStr .= "tagname='{$dbConn->real_escape_string($tagname)}'";
+        }
+
         $sql = "SELECT
                   posts.id as post_id,
                   posts.created,
@@ -48,11 +50,16 @@ class TaggedController extends ModuleController
                   JOIN authors ON posts.author_id = authors.id
                   JOIN tagged_posts ON posts.id = tagged_posts.post_id
                   JOIN tags ON tagged_posts.tag_id = tags.id
-                WHERE tagname='$tagname'";
+                WHERE {$tagnameWhereStr}";
         $result = $dbConn->query($sql);
         $taggedPostObjs = []; // TODO: debug this
         while ($taggedPostObj = $result->fetch_object()) {
-            $taggedPostObjs []= $taggedPostObj;
+            if (array_key_exists($taggedPostObj->post_id, $taggedPostObjs)) {
+                $taggedPostObjs[$taggedPostObj->post_id]->tagname []= $taggedPostObj->tagname;
+            } else {
+                $taggedPostObj->tagname = [$taggedPostObj->tagname];
+                $taggedPostObjs[$taggedPostObj->post_id] = $taggedPostObj;
+            }
         }
         return $taggedPostObjs;
     }
@@ -86,6 +93,5 @@ class TaggedController extends ModuleController
             $this->moduleView->displayContent();
         }
     }
-
 
 }
