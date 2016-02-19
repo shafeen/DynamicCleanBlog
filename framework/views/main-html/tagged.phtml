@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Tagged Posts</title>
+
+    <? include("views/partial-html/_head-common.phtml"); ?>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <? include("views/partial-html/_navigation.phtml"); ?>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the include below. -->
+    <? include("views/partial-html/_simple-header.phtml"); ?>
+
+    <!-- Main Content TODO: complete this (currently just copied from home module) -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <? foreach($this->taggedPostObjs as $taggedPostObj) { ?>
+                    <div class="post-preview">
+                        <a href="/post/<?=$taggedPostObj->created?>/<?=$taggedPostObj->clean_url_title?>">
+                            <h2 class="post-title">
+                                <?=$taggedPostObj->post_title?>
+                            </h2>
+                            <h3 class="post-subtitle">
+                                <?=$taggedPostObj->post_subtitle?>
+                            </h3>
+                        </a>
+                        <p class="post-meta">Posted by <a href="#"><?=$taggedPostObj->author_name?></a> on <?=date("F jS, Y",strtotime($taggedPostObj->created))?>
+                            &nbsp &nbsp &nbsp
+                            <? foreach ($taggedPostObj->tagname as $tagname) { ?>
+                                <b>[<?=$tagname?>]</b>
+                            <? } ?>
+                        </p>
+                    </div>
+                    <hr/>
+                <? } ?>
+
+                <!-- Pager -->
+                <ul class="pager">
+                    <!-- prev page available if on any page other than page 1 -->
+                    <? if ($this->pageNum > 1) { ?>
+                        <li class="previous">
+                            <a href="<?="/home/page/".($this->pageNum-1)."#postPreview1"?>"><span class="glyphicon glyphicon-chevron-left"></span> Newer Posts</a>
+                        </li>
+                    <? } ?>
+                    <? if ($this->pageNum < $this->maxPageNum) { ?>
+                        <li class="next">
+                            <a href="<?="/home/page/".($this->pageNum+1)."#postPreview1"?>">Older Posts <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </li>
+                    <? } ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <? include("views/partial-html/_footer.phtml"); ?>
+
+</body>
+
+</html>

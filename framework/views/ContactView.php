@@ -4,6 +4,9 @@ namespace framework\views;
 
 class ContactView extends ModuleView
 {
+    /** @var array */
+    protected $headerInfo;
+
     protected function initStaticInfo() {
         $this->headerInfo = array(
             "mainHeading" => "Contact Me",

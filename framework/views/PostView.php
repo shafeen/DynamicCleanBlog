@@ -7,6 +7,17 @@ require_once("models/PostModel.php");
 
 class PostView extends ModuleView
 {
+    /** @var string */
+    protected $title;
+    /** @var string */
+    protected $subtitle;
+    /** @var string */
+    protected $author;
+    /** @var string */
+    protected $date;
+    /** @var string */
+    protected $postBody;
+
     protected function initStaticInfo() {
         // no static info to initialize
     }
