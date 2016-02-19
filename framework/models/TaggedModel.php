@@ -38,7 +38,8 @@ class TaggedModel
 
     /** @param array $tags
       * @param int $pageNum
-      * @param string $apiEndpoint */
+      * @param string $apiEndpoint
+      * @param array $taggedPostObjs */
     function __construct($tags, $pageNum, $apiEndpoint, $taggedPostObjs) {
         $this->tags = $tags;
         $this->pageNum= $pageNum;
