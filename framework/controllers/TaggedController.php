@@ -46,7 +46,8 @@ class TaggedController extends ModuleController
                   JOIN authors ON posts.author_id = authors.id
                   JOIN tagged_posts ON posts.id = tagged_posts.post_id
                   JOIN tags ON tagged_posts.tag_id = tags.id
-                WHERE {$tagnameWhereStr}";
+                WHERE {$tagnameWhereStr}
+                ORDER BY posts.created DESC, post_id ASC";
         $result = $dbConn->query($sql);
         $taggedPostObjs = []; // TODO: debug this
         while ($taggedPostObj = $result->fetch_object()) {
