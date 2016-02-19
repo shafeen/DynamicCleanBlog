@@ -13,14 +13,10 @@ class TaggedController extends ModuleController
 {
     const TAG_DELIMITER = "--";
 
-    private function getTaggedPostsFromDbForTags($tagArray) {
-        return $this->getTaggedPostsFromDb($tagArray);
-    }
-
     // TODO: move database access to a separate component
     /** @param array $tagnameArray
      *  @return array */
-    private function getTaggedPostsFromDb($tagnameArray) {
+    private function getTaggedPostsFromDbForTags($tagnameArray) {
         if (empty($tagnameArray)) {
             return null;
         }
