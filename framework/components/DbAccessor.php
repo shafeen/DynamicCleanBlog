@@ -2,7 +2,7 @@
 namespace framework\components;
 
 use framework\components\Singleton;
-require_once("components/Singleton");
+require_once("components/Singleton.php");
 use framework\models\HomeModel;
 require_once("models/HomeModel.php");
 
