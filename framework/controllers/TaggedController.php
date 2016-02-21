@@ -11,7 +11,7 @@ require_once("views/TaggedView.php");
 
 class TaggedController extends ModuleController
 {
-    const TAG_DELIMITER = "--";
+    const TAG_DELIMITER = ':';
 
     // TODO: move database access to a separate component
     /** @param array $tagnameArray
@@ -75,7 +75,7 @@ class TaggedController extends ModuleController
      *  /tagged/tags/<tag1>--<tag2>--<tag3>/page/<pagenum>
      *
      *  For Example:
-     *  /tagged/tags/redis--java/page/1 */
+     *  /tagged/tags/redis:java/page/1 */
     function run() {
         $this->moduleModel = $this->getInitializedTaggedModel();
 
