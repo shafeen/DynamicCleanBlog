@@ -6,7 +6,7 @@ use framework\components\DbAccessor;
 use framework\controllers\ModuleController;
 use framework\models\TaggedModel;
 use framework\views\TaggedView;
-require_once("components/DbAccesor.php");
+require_once("components/DbAccessor.php");
 require_once("controllers/ModuleController.php");
 require_once("models/TaggedModel.php");
 require_once("views/TaggedView.php");
