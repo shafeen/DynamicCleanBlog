@@ -2,22 +2,12 @@
 
 namespace framework\components;
 
-class CleanRequestUrlParser
+use framework\components\Singleton;
+require_once("components/Singleton");
+
+class CleanRequestUrlParser extends Singleton
 {
-    static private $instance;
-
     private $explodedCleanRequestUrl;
-
-    /** @return CleanRequestUrlParser */
-    static public function instance() {
-        if (empty(self::$instance)) {
-            self::$instance = new CleanRequestUrlParser();
-        }
-        return self::$instance;
-    }
-
-    private function __construct() {
-    }
 
     /** @return array */
     public function getExplodedCleanRequestUrl() {
