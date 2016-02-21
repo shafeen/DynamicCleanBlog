@@ -9,7 +9,7 @@ abstract class Singleton
     /** @return Singleton */
     static public function instance() {
         if (empty(self::$instance)) {
-            self::$instance = new CleanRequestUrlParser();
+            self::$instance = new static();
         }
         return self::$instance;
     }
