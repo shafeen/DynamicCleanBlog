@@ -13,7 +13,7 @@ the form data to "/mail/contact_me.php". This should either be
 overwritten to send to a different controller or we have to make
 sure that the "main/contact_me.php" is available to handle the form.
 
-
+[Task] move database access to a separate component -> DbAccessor.php
 
 
 
