@@ -2,22 +2,24 @@
 
 namespace framework\components;
 
+require_once("components/CleanRequestUrlParser.php");
+require_once("components/DbAccessor.php");
+
 abstract class Singleton
 {
-    static private $instance;
+    static protected $instances;
 
     /** @return Singleton */
     public static function instance() {
-        if (empty(static::$instance)) {
-            $calledClassName = static::getClassName();
-            static::$instance = $calledClassName();
+        // workaround for the late static binding problem (for static functions)
+        $calledClassName = get_called_class();
+        if (empty(self::$instances[$calledClassName])) {
+            self::$instances[$calledClassName] = new static();
         }
-        return self::$instance;
+        return self::$instances[$calledClassName];
     }
 
     private function __construct() {
     }
 
-    /** @return string */
-    abstract protected function getClassName();
 }

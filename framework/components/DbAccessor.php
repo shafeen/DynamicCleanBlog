@@ -10,10 +10,6 @@ class DbAccessor extends Singleton
 {
     private $dbConn;
 
-    protected function getClassName() {
-        return __CLASS__;
-    }
-
     private function getDbConn() {
         // NOTE: use php5-mysqlnd
         if (empty($this->dbConn)) {
