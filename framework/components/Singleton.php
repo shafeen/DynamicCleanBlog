@@ -8,9 +8,9 @@ abstract class Singleton
 
     /** @return Singleton */
     public static function instance() {
-        if (empty(self::$instance)) {
+        if (empty(static::$instance)) {
             $calledClassName = static::getClassName();
-            self::$instance = $calledClassName();
+            static::$instance = $calledClassName();
         }
         return self::$instance;
     }
