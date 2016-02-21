@@ -14,7 +14,7 @@ require_once("models/HomeModel.php");
 class HomeController extends ModuleController
 {
     function run() {
-        /** @var DbAccessor DbAccessor::instance() */
+        /** @var DbAccessor $dbAccessor */
         $dbAccessor = DbAccessor::instance();
         $totalPosts = $dbAccessor->getTotalPostNum();
 
