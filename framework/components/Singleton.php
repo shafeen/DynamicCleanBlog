@@ -7,9 +7,10 @@ abstract class Singleton
     static private $instance;
 
     /** @return Singleton */
-    static public function instance() {
+    public static function instance() {
         if (empty(self::$instance)) {
-            self::$instance = new static();
+            $calledClassName = get_called_class();
+            self::$instance = $calledClassName();
         }
         return self::$instance;
     }
