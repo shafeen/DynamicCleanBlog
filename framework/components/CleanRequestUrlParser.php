@@ -9,6 +9,10 @@ class CleanRequestUrlParser extends Singleton
 {
     private $explodedCleanRequestUrl;
 
+    protected function getClassName() {
+        return __CLASS__;
+    }
+
     /** @return array */
     public function getExplodedCleanRequestUrl() {
         if (empty($this->explodedCleanRequestUrl)) {
