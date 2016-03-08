@@ -19,19 +19,22 @@ class CleanRequestUrlParserTest extends PHPUnit_Framework_TestCase
 
 
     public function test_getExplodedCleanRequestUrl() {
-        require_once('components/CleanRequestUrlParser.php');
-        $_SERVER['REQUEST_URI'] = '/home/page/1';
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        echo $_SERVER['REQUEST_URI'];
-
+        $_SERVER['REQUEST_URI'] = '/home/page/1';
 
         /** @var CleanRequestUrlParser $cleanRequestUrlParser */
+        require_once('components/CleanRequestUrlParser.php');
         $cleanRequestUrlParser = CleanRequestUrlParser::instance();
-        print_r($cleanRequestUrlParser->getExplodedCleanRequestUrl());
-        $cleanRequestUrlParser->parseGetVars(1);
-        print_r($_GET);
+        $explodedCleanRequestUrl_actual = $cleanRequestUrlParser->getExplodedCleanRequestUrl();
+        $explodedCleanRequestUrl_expected = ['home', 'page', '1'];
 
-        // TODO: complete this
+        $this->assertEquals(count($explodedCleanRequestUrl_actual),
+                            count($explodedCleanRequestUrl_expected));
+
+        for ($i = 0; $i < count($explodedCleanRequestUrl_expected); $i++) {
+            $this->assertEquals($explodedCleanRequestUrl_expected[$i],
+                                $explodedCleanRequestUrl_actual[$i]);
+        }
     }
 
     public function test_parseGetVars() {
