@@ -13,10 +13,11 @@ class CleanRequestUrlParserTest extends PHPUnit_Framework_TestCase
 
     protected function initRootDir() {
         // before testing -> 'framework/' should be the root directory
-        chdir('..');
-        $this->assertEquals(substr(getcwd(), -9), 'framework');
+        if (substr(getcwd(), -9) != 'framework') {
+            chdir('..');
+            $this->assertEquals(substr(getcwd(), -9), 'framework');
+        }
     }
-
 
     public function test_getExplodedCleanRequestUrl() {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -38,10 +39,30 @@ class CleanRequestUrlParserTest extends PHPUnit_Framework_TestCase
     }
 
     public function test_parseGetVars() {
-        // TODO: complete this
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/home/page/1';
+
+        /** @var CleanRequestUrlParser $cleanRequestUrlParser */
+        require_once('components/CleanRequestUrlParser.php');
+        $cleanRequestUrlParser = CleanRequestUrlParser::instance();
+        $cleanRequestUrlParser->parseGetVars(1);
+
+        $this->assertEquals(count($_GET), 1);
+        $this->assertArrayHasKey('page', $_GET);
+        $this->assertEquals($_GET['page'], '1');
     }
 
     public function test_parsePostVars() {
-        // TODO: complete this
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['REQUEST_URI'] = '/home/page/1';
+
+        /** @var CleanRequestUrlParser $cleanRequestUrlParser */
+        require_once('components/CleanRequestUrlParser.php');
+        $cleanRequestUrlParser = CleanRequestUrlParser::instance();
+        $cleanRequestUrlParser->parsePostVars(1);
+
+        $this->assertEquals(count($_POST), 1);
+        $this->assertArrayHasKey('page', $_POST);
+        $this->assertEquals($_POST['page'], '1');
     }
 }
