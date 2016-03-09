@@ -14,6 +14,13 @@ require_once("views/NotFoundView.php");
 require_once("views/PostView.php");
 require_once("models/PostModel.php");
 
+/** Class PostController
+ *
+ *  Urls in the following formats should
+ *  cause this controller to be dispatched:
+ *  - /post/1989-05-24/this-is-a-post-title
+ *  - /post/<YYYY-MM-DD>/<post-display-title>
+ */
 class PostController extends ModuleController
 {
     /** Date and Title will be parsed assuming the

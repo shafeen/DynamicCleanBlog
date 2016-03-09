@@ -7,6 +7,11 @@ use framework\views\NotFoundView;
 require_once("controllers/ModuleController.php");
 require_once("views/NotFoundView.php");
 
+/** Class NotFoundController
+ *
+ *  Routes that cannot be associated to any other
+ *  controller will be routed to this controller.
+ */
 class NotFoundController extends ModuleController
 {
     function run() {

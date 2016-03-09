@@ -11,6 +11,14 @@ require_once("controllers/ModuleController.php");
 require_once("views/HomeView.php");
 require_once("models/HomeModel.php");
 
+/** Class HomeController
+ *
+ *  Urls in the following formats should
+ *  cause this controller to be dispatched:
+ *  - /home/
+ *  - /home/page/1
+ *  - /home/page/<page_number>
+ */
 class HomeController extends ModuleController
 {
     function run() {

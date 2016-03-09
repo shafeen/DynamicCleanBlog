@@ -9,6 +9,12 @@ require_once("controllers/ModuleController.php");
 require_once("views/AboutView.php");
 //require_once("models/AboutModel.php");
 
+/** Class AboutController
+ *
+ *  Urls in the following formats should
+ *  cause this controller to be dispatched:
+ *  - /about/
+ */
 class AboutController extends ModuleController
 {
     function run() {

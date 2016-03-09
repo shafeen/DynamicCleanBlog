@@ -11,6 +11,12 @@ require_once("controllers/ModuleController.php");
 require_once("models/TaggedModel.php");
 require_once("views/TaggedView.php");
 
+/** Class TaggedController
+ *
+ *  Urls in the following formats should
+ *  cause this controller to be dispatched:
+ *  - /tagged/tags/<tag1>:<tag2>:<tag3>/page/<page_number>
+ */
 class TaggedController extends ModuleController
 {
     const TAG_DELIMITER = ':';
