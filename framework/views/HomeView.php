@@ -3,6 +3,7 @@
 namespace framework\views;
 
 use framework\models\HomeModel;
+require_once("views/ModuleView.php");
 
 class HomeView extends ModuleView
 {

@@ -2,6 +2,7 @@
 
 namespace framework\views;
 
+require_once("views/ModuleView.php");
 use framework\models\PostModel;
 require_once("models/PostModel.php");
 

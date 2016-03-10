@@ -2,6 +2,8 @@
 
 namespace framework\views;
 
+require_once("views/ModuleView.php");
+
 class ContactView extends ModuleView
 {
     /** @var array */

@@ -2,7 +2,6 @@
 
 namespace framework\views;
 
-use framework\views\ModuleView;
 require_once("views/ModuleView.php");
 
 class NotFoundView extends ModuleView

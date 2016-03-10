@@ -3,6 +3,7 @@
 namespace framework\views;
 
 use framework\models\TaggedModel;
+require_once("views/ModuleView.php");
 
 class TaggedView extends ModuleView
 {
