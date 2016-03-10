@@ -15,6 +15,15 @@ use framework\controllers\NotFoundController;
 // TODO: refactor this VERY basic router
 class Router extends Singleton
 {
+    private $moduleToControllerMap = array(
+        'home'    => 'HomeController.php',
+        'post'    => 'PostController.php',
+        'about'   => 'AboutController.php',
+        'contact' => 'ContactController.php',
+        'tagged'  => 'TaggedController.php',
+        'notfound'=> 'NotFoundController.php'
+    );
+
     public function routeToModuleController() {
         $explodedCleanRequestUrl = CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl();
         $moduleToRun = $this->getModuleNameFromRequestUrl($explodedCleanRequestUrl);
@@ -48,6 +57,9 @@ class Router extends Singleton
         $moduleToRun = 'home';
         if (count($explodedCleanRequestUrl)) {
             $moduleToRun = strtolower($explodedCleanRequestUrl[0]);
+        }
+        if (!array_key_exists($moduleToRun, $this->moduleToControllerMap)) {
+            $moduleToRun = 'notfound';
         }
         return $moduleToRun;
     }
