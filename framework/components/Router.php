@@ -41,7 +41,7 @@ class Router extends Singleton
         $moduleToRun = 'home';
         if (count($explodedCleanRequestUrl)) {
             $moduleNameFromUrl = strtolower($explodedCleanRequestUrl[0]);
-            if (array_key_exists($moduleToRun, $this->moduleToControllerMap)) {
+            if (array_key_exists($moduleNameFromUrl, $this->moduleToControllerMap)) {
                 $moduleToRun = $moduleNameFromUrl;
             } else {
                 $moduleToRun = 'notfound';
