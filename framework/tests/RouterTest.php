@@ -10,6 +10,8 @@ class RouterTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp() {
         $this->initRootDir();
+        $this->initRequired();
+        Router::resetInstances();
     }
 
     protected function initRootDir() {
@@ -20,17 +22,18 @@ class RouterTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    protected function initRequired() {
+        require_once('components/CleanRequestUrlParser.php');
+        require_once('components/Router.php');
+    }
+
     // TODO: complete this unit test class --> CORRECTLY
 
     public function test_routeToHomeController() {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/home/page/1';
 
-        require_once('components/CleanRequestUrlParser.php');
-        print_r(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl());
-
         /** @var Router $router */
-        require_once('components/Router.php');
         $router = Router::instance();
         $moduleController = $router->routeToModuleController();
         $this->assertEquals('framework\controllers\HomeController', get_class($moduleController));
@@ -40,11 +43,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/contact';
 
-        require_once('components/CleanRequestUrlParser.php');
-        print_r(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl());
-
         /** @var Router $router */
-        require_once('components/Router.php');
         $router = Router::instance();
         $moduleController = $router->routeToModuleController();
         $this->assertEquals('framework\controllers\ContactController', get_class($moduleController));
@@ -54,11 +53,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/about';
 
-        require_once('components/CleanRequestUrlParser.php');
-        print_r(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl());
-
         /** @var Router $router */
-        require_once('components/Router.php');
         $router = Router::instance();
         $moduleController = $router->routeToModuleController();
         $this->assertEquals('framework\controllers\AboutController', get_class($moduleController));
@@ -68,11 +63,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/post/1989-05-24/Man-must-explore-and-this-is-exploration-at-its-greatest';
 
-        require_once('components/CleanRequestUrlParser.php');
-        print_r(CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl());
-
         /** @var Router $router */
-        require_once('components/Router.php');
         $router = Router::instance();
         $moduleController = $router->routeToModuleController();
         $this->assertEquals('framework\controllers\PostController', get_class($moduleController));

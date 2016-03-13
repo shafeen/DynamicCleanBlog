@@ -22,4 +22,9 @@ abstract class Singleton
     private function __construct() {
     }
 
+    /** Forget all instances saved.
+     *  This function is for PHPUnit use ONLY!! */
+    public static function resetInstances() {
+        self::$instances = null;
+    }
 }
