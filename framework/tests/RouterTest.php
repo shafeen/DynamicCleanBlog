@@ -78,4 +78,14 @@ class RouterTest extends PHPUnit_Framework_TestCase
         $moduleController = $router->routeToModuleController();
         $this->assertEquals('framework\controllers\TaggedController', get_class($moduleController));
     }
+
+    public function test_routeToNotFoundController() {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/blah/blah';
+
+        /** @var Router $router */
+        $router = Router::instance();
+        $moduleController = $router->routeToModuleController();
+        $this->assertEquals('framework\controllers\NotFoundController', get_class($moduleController));
+    }
 }
