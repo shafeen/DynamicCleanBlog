@@ -40,10 +40,12 @@ class Router extends Singleton
     private function getModuleNameFromRequestUrl($explodedCleanRequestUrl) {
         $moduleToRun = 'home';
         if (count($explodedCleanRequestUrl)) {
-            $moduleToRun = strtolower($explodedCleanRequestUrl[0]);
-        }
-        if (!array_key_exists($moduleToRun, $this->moduleToControllerMap)) {
-            $moduleToRun = 'notfound';
+            $moduleNameFromUrl = strtolower($explodedCleanRequestUrl[0]);
+            if (array_key_exists($moduleNameFromUrl, $this->moduleToControllerMap)) {
+                $moduleToRun = $moduleNameFromUrl;
+            } else {
+                $moduleToRun = 'notfound';
+            }
         }
         return $moduleToRun;
     }
