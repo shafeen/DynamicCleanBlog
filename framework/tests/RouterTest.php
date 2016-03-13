@@ -18,7 +18,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
         // before testing -> 'framework/' should be the root directory
         if (substr(getcwd(), -9) != 'framework') {
             chdir('..');
-            $this->assertEquals(substr(getcwd(), -9), 'framework');
+            $this->assertEquals(substr(getcwd(), -9), 'frasmework');
         }
     }
 
