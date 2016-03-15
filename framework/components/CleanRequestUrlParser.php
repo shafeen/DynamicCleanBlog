@@ -8,6 +8,7 @@ require_once("components/Singleton.php");
 class CleanRequestUrlParser extends Singleton
 {
     private $explodedCleanRequestUrl;
+    private $cleanRequestUrl;
 
     /** @return array */
     public function getExplodedCleanRequestUrl() {
@@ -21,6 +22,13 @@ class CleanRequestUrlParser extends Singleton
             }
         }
         return $this->explodedCleanRequestUrl;
+    }
+
+    public function getCleanRequestUrl() {
+        if (empty($this->cleanRequestUrl)) {
+            $this->cleanRequestUrl = implode('/', $this->getExplodedCleanRequestUrl());
+        }
+        return $this->cleanRequestUrl;
     }
 
     /** @param int $offset */
