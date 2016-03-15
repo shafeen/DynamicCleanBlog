@@ -17,6 +17,7 @@ class Router extends Singleton
 {
     // when adding a new module route -->
     // add the module name to Controller here in this array
+    // TODO: need a way to verify expected url format for a controller in the Router
     private $moduleToControllerMap = array(
         'home'    => 'HomeController',
         'post'    => 'PostController',
