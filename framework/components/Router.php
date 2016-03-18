@@ -30,14 +30,13 @@ class Router extends Singleton
 
     public function routeToModuleController() {
         $explodedCleanRequestUrl = CleanRequestUrlParser::instance()->getExplodedCleanRequestUrl();
-        $cleanRequestUrl = CleanRequestUrlParser::instance()->getCleanRequestUrl();
         $moduleToRun = $this->getModuleNameFromRequestUrl($explodedCleanRequestUrl);
 
         // return the correct intialized module's controller
         $controllerUrlRegex = $this->moduleToControllerMap[$moduleToRun][1];
         $controllerName = $this->moduleToControllerMap[$moduleToRun][0];
         $defaultControllerName = $this->moduleToControllerMap['notfound'][0];
-        if (!preg_match($controllerUrlRegex, $cleanRequestUrl)) {
+        if (!preg_match($controllerUrlRegex, CleanRequestUrlParser::instance()->getCleanRequestUrl())) {
             $controllerName = $defaultControllerName;
         }
 
