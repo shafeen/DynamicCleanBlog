@@ -24,7 +24,7 @@ class Router extends Singleton
         'post'    => array('PostController',     '/^\/?post\/[0-9]{4}-[0-9]{2}-[0-9]{2}\/(.*)/'),
         'about'   => array('AboutController',    '/^\/?about\/?$/'),
         'contact' => array('ContactController',  '/^\/?contact\/?$/'),
-        'tagged'  => array('TaggedController',   '/^\/?tagged\/tags\/[a-zA-Z]+(:[a-zA-Z]+)*(\/|(\/page\/[0-9]+\/?))?$/'),
+        'tagged'  => array('TaggedController',   '/^\/?tagged\/tags\/[a-zA-Z0-9]+(:[a-zA-Z0-9]+)*(\/|(\/page\/[0-9]+\/?))?$/'),
         'notfound'=> array('NotFoundController', '(.*)') // no regex match needed or used
     );
 
