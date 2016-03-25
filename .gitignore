@@ -1,1 +1,5 @@
 .idea/
+
+# ignore composer files
+/vendor/
+composer.lock
